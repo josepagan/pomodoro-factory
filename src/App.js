@@ -3,9 +3,10 @@ import './App.css';
 import Timer from './components/timer';
 
 function App() {
+  const handlePomodoro = () => console.log('omgpomodoro')
   return (
     <div className="App">
-      <Timer />
+      <Timer pomodoro={handlePomodoro}/>
     </div>
   );
 }
