@@ -1,29 +1,36 @@
 import React, { useState } from "react";
-import useInterval from '../useInterval'
+import useInterval from "../useInterval";
 // import './App.css';
 
 function Timer({ pomodoro }) {
-  const [timeNow, setTimeNow] = useState({});
-  const [timerStartPoint, setTimerstartPoint] = useState({});
+  const [timeLeft, setTimeleft] = useState(15);
   const [clockTicking, setClockTicking] = useState(false);
 
-  useInterval(() => {
-    tick()
-  }, clockTicking ? 1000 : null)
+  useInterval(
+    () => {
+      tick();
+    },
+    clockTicking ? 1000 : null
+  );
 
   const clickHandle = () => {
-    setClockTicking(!clockTicking)
-  }
-  const tick = () => {
-    console.log("tick!!!");
+    setClockTicking(!clockTicking);
   };
 
-  const diff = timeNow - timerStartPoint;
+  const tick = () => {
+    setTimeleft(timeLeft - 1);
+  };
+
+  if (timeLeft < 0){
+    setTimeleft(15);
+    setClockTicking(false);
+    pomodoro()
+  }
+
 
   return (
     <div className="">
-      <p>You clicked the button {diff.toString()} seconds ago </p>
-      {/* <p>Time now it is {timeNow} </p> */}
+      <h1>{timeLeft}</h1>
       <button onClick={clickHandle}>Click me!</button>
     </div>
   );
