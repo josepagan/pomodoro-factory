@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+//using setInterval as the blog said...
 import useInterval from "../useInterval";
 // import './App.css';
 
