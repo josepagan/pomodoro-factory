@@ -7,6 +7,7 @@ function App() {
   const handlePomodoro = () => {
     setPomodoroCount(pomodoroCount + 1);
   };
+  
   return (
     <div className="App">
       <h1>Pomodoros: {pomodoroCount}</h1>
