@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Timer from "./components/timer";
-
+//probando
 function App() {
   const [pomodoroCount, setPomodoroCount] = useState(0);
   const handlePomodoro = () => {
