@@ -13,6 +13,7 @@ function App() {
       <h1>Pomodoros: {pomodoroCount}</h1>
       <Timer pomodoro={handlePomodoro} />
     </div>
+    //to do create new to do list... again grrr
   );
 }
 
