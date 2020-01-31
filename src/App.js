@@ -14,6 +14,7 @@ function App() {
       <Timer pomodoro={handlePomodoro} />
     </div>
     //to do create new to do list... again grrr
+    //y muchas mas cosas
   );
 }
 
