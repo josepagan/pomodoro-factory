@@ -1,24 +1,46 @@
 import React, { useState } from "react";
 
 const Todo = () => {
-  const [todoArray, setTodoArray] = useState(["wtf", "omg", "bbq"]);
+  const [todoArray, setTodoArray] = useState([]);
+  const [inputText, setInputText] = useState("");
+
+  const handleChange = event => {
+    setInputText(event.target.value);
+  };
+
+  const handleSubmission = event => {
+    // const newObject = {};
+    // newObject.text = inputText;
+    // newObject.pomoCount = 0;
+    const newObject = {text: inputText, pomoCount: 0}
+    setTodoArray([...todoArray, newObject]);
+    event.preventDefault();
+  };
   return (
     <div>
       <TodoList todoArray={todoArray} />
-      <NewTodo />
+      <NewTodoForm
+        inputText={inputText}
+        handleChange={handleChange}
+        handleSubmission={handleSubmission}
+      />
     </div>
   );
 };
 
 const TodoList = ({ todoArray }) => {
-  const todoList = todoArray.map(element => <li>{element}</li>);
+  const todoList = todoArray.map(element => 
+  <li>{element.text}<PomoCountBox number={element.pomoCount}/></li>
+  );
   return <ul>{todoList}</ul>;
 };
 
-const NewTodo = () => {
+const PomoCountBox = ({number}) => number
+
+const NewTodoForm = ({ inputText, handleChange, handleSubmission }) => {
   return (
-    <form>
-      <input type="text" />
+    <form onSubmit={handleSubmission}>
+      <input type="text" onChange={handleChange} value={inputText} />
     </form>
   );
 };
