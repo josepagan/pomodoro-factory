@@ -13,7 +13,9 @@ const App = () => {
     <div className="App">
       <h1>Pomodoros: {pomodoroCount}</h1>
       <Timer pomodoro={handlePomodoro} />
-      <Todo />
+      // i think that the best thing I can doo is to trow all the todo datain an object
+      <Todo id="001" name="original" />
+      <Todo id="002" name="new todo" />
     </div>
     //to do create new to do list... again grrr
     //y muchas mas cosas
