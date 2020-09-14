@@ -13,14 +13,19 @@ const App = () => {
   };
 
   useEffect(
-    ()=>{
-      async function fetchData(){
-        fetch();
+    () => {
+      async function fetchData() {
+        console.log("where the fuck is the data???")
+        //todo I must add json parser to all this shit
 
-        setTasksList()
+        fetch('http://localhost:3010/api/taskLists/')
+          .then(res => res.json())
+          .then(data => console.log(data));
+
+        // setTasksList()
       }
       fetchData();
-    },[])
+    }, [])
 
   //for the design I am going to go for a simple card like design. So each card
   //will be a collection of tasks. instead of embeddig one into another I am
@@ -33,21 +38,21 @@ const App = () => {
       <NavBar />
 
       {/* <Button variant="contained" color="primary"> Useless Button </Button> */}
-      {/* header will go here */} 
+      {/* header will go here */}
       <h1>Pomodoros: {pomodoroCount}</h1>
 
       <Timer pomodoro={handlePomodoro} />
       <Grid
 
-      container
-      direction="row"
-      justify="center"
-      alignItems="flex-start"
-      spacing={3}
-    >
+        container
+        direction="row"
+        justify="center"
+        alignItems="flex-start"
+        spacing={3}
+      >
         <Grid item xs={4}>
           <Card minHeight="25%">
-            <Todo id="001" name="original"  />
+            <Todo id="001" name="original" />
           </Card>
         </Grid>
         <Grid item xs={4}>
