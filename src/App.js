@@ -3,6 +3,7 @@ import "./App.css";
 import Timer from "./components/Timer";
 import Todo from './components/Todo'
 import { Button, Grid, Card } from '@material-ui/core'
+import Cards from './components/Cards'
 import NavBar from './components/NavBar'
 
 const App = () => {
@@ -20,17 +21,14 @@ const App = () => {
 
         fetch('http://localhost:3010/api/taskLists/')
           .then(res => res.json())
-          .then(data => console.log(data));
+          .then(data => setTasksList(data));
 
         // setTasksList()
       }
       fetchData();
     }, [])
 
-  //for the design I am going to go for a simple card like design. So each card
-  //will be a collection of tasks. instead of embeddig one into another I am
-  //going to link them using tags. It would be could if I could open a
-  //a "drawer of tags"
+
 
   return (
     <div className="App">
@@ -42,51 +40,8 @@ const App = () => {
       <h1>Pomodoros: {pomodoroCount}</h1>
 
       <Timer pomodoro={handlePomodoro} />
-      <Grid
-
-        container
-        direction="row"
-        justify="center"
-        alignItems="flex-start"
-        spacing={3}
-      >
-        <Grid item xs={4}>
-          <Card minHeight="25%">
-            <Todo id="001" name="original" />
-          </Card>
-        </Grid>
-        <Grid item xs={4}>
-          <Card>
-            <Todo id="001" name="original" />
-          </Card>
-        </Grid>
-        <Grid item xs={4}>
-          <Card>
-            <Todo id="001" name="original" />
-          </Card>
-        </Grid>
-        <Grid item xs={4}>
-          <Card>
-            <Todo id="001" name="original" />
-          </Card>
-        </Grid>
-        <Grid item xs={4}>
-          <Card>
-            <Todo id="001" name="original" />
-          </Card>
-        </Grid>
-        <Grid item xs={4}>
-          <Card>
-            <Todo id="001" name="original" />
-          </Card>
-        </Grid>
-        <Grid item xs={4}>
-          <Card>
-            <Todo id="001" name="original" />
-          </Card>
-        </Grid>
-
-      </Grid>
+      <Cards data={tasksLists}/>
+      
     </div>
     //to do create new to do list... again grrr
     //y muchas mas cosas
