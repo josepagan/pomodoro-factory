@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 const Todo = () => {
+  // here it is todo form, I have to create a component out of this TodoForm
+  // and of course refactor
   const [todoArray, setTodoArray] = useState([]);
   const [inputText, setInputText] = useState("");
 
@@ -16,6 +18,7 @@ const Todo = () => {
     setTodoArray([...todoArray, newObject]);
     event.preventDefault();
   };
+  
   return (
     <div>
       <TodoList todoArray={todoArray} />

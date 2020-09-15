@@ -16,14 +16,9 @@ const App = () => {
   useEffect(
     () => {
       async function fetchData() {
-        console.log("where the fuck is the data???")
-        //todo I must add json parser to all this shit
-
         fetch('http://localhost:3010/api/taskLists/')
           .then(res => res.json())
           .then(data => setTasksList(data));
-
-        // setTasksList()
       }
       fetchData();
     }, [])
@@ -35,8 +30,6 @@ const App = () => {
 
       <NavBar />
 
-      {/* <Button variant="contained" color="primary"> Useless Button </Button> */}
-      {/* header will go here */}
       <h1>Pomodoros: {pomodoroCount}</h1>
 
       <Timer pomodoro={handlePomodoro} />
