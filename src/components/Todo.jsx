@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import TodoList from "./TodoList";
+import NewTodoForm from './NewTodoForm'
 
-const Todo = () => {
-  // here it is todo form, I have to create a component out of this TodoForm
-  // and of course refactor
+const Todo = ({ _id, tasks, tags, name }) => {
   const [todoArray, setTodoArray] = useState([]);
   const [inputText, setInputText] = useState("");
 
@@ -10,41 +10,13 @@ const Todo = () => {
     setInputText(event.target.value);
   };
 
-  const handleSubmission = event => {
-    // const newObject = {};
-    // newObject.text = inputText;
-    // newObject.pomoCount = 0;
-    const newObject = {text: inputText, pomoCount: 0}
-    setTodoArray([...todoArray, newObject]);
-    event.preventDefault();
-  };
-  
-  return (
+    return (
     <div>
-      <TodoList todoArray={todoArray} />
+      <TodoList todoArray={tasks} />
       <NewTodoForm
-        inputText={inputText}
-        handleChange={handleChange}
-        handleSubmission={handleSubmission}
+        _id={_id}
       />
     </div>
-  );
-};
-
-const TodoList = ({ todoArray }) => {
-  const todoList = todoArray.map(element => 
-  <li>{element.text}<PomoCountBox number={element.pomoCount}/></li>
-  );
-  return <ul>{todoList}</ul>;
-};
-
-const PomoCountBox = ({number}) => number
-
-const NewTodoForm = ({ inputText, handleChange, handleSubmission }) => {
-  return (
-    <form onSubmit={handleSubmission}>
-      <input type="text" onChange={handleChange} value={inputText} />
-    </form>
   );
 };
 
