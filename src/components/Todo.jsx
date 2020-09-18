@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TodoList from "./TodoList";
+import TodoTable from "./TodoTable";
 import NewTodoForm from './NewTodoForm'
 
 const Todo = ({ _id, tasks, tags, name }) => {
@@ -12,7 +12,7 @@ const Todo = ({ _id, tasks, tags, name }) => {
 
     return (
     <div>
-      <TodoList todoArray={tasks} />
+      <TodoTable todoArray={tasks} />
       <NewTodoForm
         _id={_id}
       />

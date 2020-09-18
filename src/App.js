@@ -5,6 +5,7 @@ import Todo from './components/Todo'
 import { Button, Grid, Card } from '@material-ui/core'
 import Cards from './components/Cards'
 import NavBar from './components/NavBar'
+import Theme from './components/Theme'
 
 const App = () => {
   const [tasksLists, setTasksList] = useState(null);
@@ -26,6 +27,8 @@ const App = () => {
 
 
   return (
+    <Theme>
+
     <div className="App">
 
       <NavBar />
@@ -38,6 +41,7 @@ const App = () => {
     </div>
     //to do create new to do list... again grrr
     //y muchas mas cosas
+    </Theme>
 
   );
 }
