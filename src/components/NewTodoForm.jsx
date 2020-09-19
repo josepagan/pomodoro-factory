@@ -1,22 +1,25 @@
 import React, { useState } from "react";
+import axios from 'axios'
 
-const NewTodoForm = (props) => {
-    const [inputText, setInputText] = useState("");
+const NewTodoForm = ({_id}) => {
+    const [text, setText] = useState("");
 
     const handleChange = event => {
-      setInputText(event.target.value);
+      setText(event.target.value);
     };
   
     const handleSubmission = event => {
-      const newObject = { text: inputText, pomoCount: 0 }
-      console.log(props);
-      setInputText("");
+      const newObject = { text: text, pomoCount: 0 }
+      //TODO use axios here to call the server with post
+      axios.post('http://localhost:3010/api/taskLists/',{_id,text})
+      // console.log({_id,text});
+      setText("");
       event.preventDefault();
     };
   
     return (
       <form onSubmit={handleSubmission}>
-        <input type="text" onChange={handleChange} value={inputText} />
+        <input type="text" onChange={handleChange} value={text} />
       </form>
     );
   };

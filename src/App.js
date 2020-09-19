@@ -6,6 +6,7 @@ import { Button, Grid, Card } from '@material-ui/core'
 import Cards from './components/Cards'
 import NavBar from './components/NavBar'
 import Theme from './components/Theme'
+import axios from 'axios';
 
 const App = () => {
   const [tasksLists, setTasksList] = useState(null);
@@ -17,9 +18,8 @@ const App = () => {
   useEffect(
     () => {
       async function fetchData() {
-        fetch('http://localhost:3010/api/taskLists/')
-          .then(res => res.json())
-          .then(data => setTasksList(data));
+        axios.get('http://localhost:3010/api/taskLists/')
+          .then(res => setTasksList(res.data) )
       }
       fetchData();
     }, [])
