@@ -3,7 +3,7 @@ import "./App.css";
 import Timer from "./components/Timer";
 import Todo from './components/Todo'
 import { Button, Grid, Card } from '@material-ui/core'
-import Cards from './components/Cards'
+import CardsGrid from './components/Cards'
 import NavBar from './components/NavBar'
 import Theme from './components/Theme'
 import axios from 'axios';
@@ -11,19 +11,26 @@ import axios from 'axios';
 const App = () => {
   const [tasksLists, setTasksList] = useState(null);
   const [pomodoroCount, setPomodoroCount] = useState(0);
+  const [resData, setResData] = useState(null)
   const handlePomodoro = () => {
     setPomodoroCount(pomodoroCount + 1);
   };
 
+  const fetchData =  function() {
+    axios.get('http://localhost:3010/api/taskLists/')
+      .then(res => setTasksList(res.data) )
+  }
+
   useEffect(
-    () => {
-      async function fetchData() {
-        axios.get('http://localhost:3010/api/taskLists/')
-          .then(res => setTasksList(res.data) )
-      }
+    () => {      
       fetchData();
     }, [])
 
+    useEffect(
+      () => {      
+        fetchData();
+      }, [resData])
+  
 
 
   return (
@@ -36,7 +43,7 @@ const App = () => {
       <h1>Pomodoros: {pomodoroCount}</h1>
 
       <Timer pomodoro={handlePomodoro} />
-      <Cards data={tasksLists}/>
+      <CardsGrid data={tasksLists} setTasksList={setTasksList} />
       
     </div>
     //to do create new to do list... again grrr

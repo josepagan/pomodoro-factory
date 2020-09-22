@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Todo from './Todo'
 import { Button, Grid, Card, Typography } from '@material-ui/core'
 
-const CardsGrid = ({ data }) => {
+const CardsGrid = ({ data, setTasksList }) => {
     if (!data) return null;
 
     const cardsArray = data.map(({ name, _id, tasks, tags }) =>
@@ -15,7 +15,8 @@ const CardsGrid = ({ data }) => {
                     _id={_id}
                     name={name}
                     tasks={tasks}
-                    tags = {tags} />
+                    tags = {tags}
+                    setTasksList={setTasksList} />
             </Card>
         </Grid>
     );

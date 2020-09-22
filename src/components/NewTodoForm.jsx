@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios'
 
-const NewTodoForm = ({_id}) => {
+const NewTodoForm = ({_id, pushNewTask }) => {
     const [text, setText] = useState("");
 
     const handleChange = event => {
@@ -9,10 +9,9 @@ const NewTodoForm = ({_id}) => {
     };
   
     const handleSubmission = event => {
-      const newObject = { text: text, pomoCount: 0 }
-      //TODO use axios here to call the server with post
       axios.post('http://localhost:3010/api/taskLists/',{_id,text})
-      // console.log({_id,text});
+      //TODO what I have to do is just push the last one into tasks
+      .then(res => pushNewTask(res.data))    
       setText("");
       event.preventDefault();
     };

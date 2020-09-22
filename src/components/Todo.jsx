@@ -3,18 +3,14 @@ import TodoTable from "./TodoTable";
 import NewTodoForm from './NewTodoForm'
 
 const Todo = ({ _id, tasks, tags, name }) => {
-  const [todoArray, setTodoArray] = useState([]);
-  const [inputText, setInputText] = useState("");
-
-  const handleChange = event => {
-    setInputText(event.target.value);
-  };
-
+const [tasksState, setTasksState] = useState(tasks);
+const pushNewTask = (newTask) => setTasksState([...tasksState, newTask])
     return (
     <div>
-      <TodoTable todoArray={tasks} />
+      <TodoTable todoArray={tasksState} />
       <NewTodoForm
         _id={_id}
+        pushNewTask={pushNewTask}
       />
     </div>
   );
