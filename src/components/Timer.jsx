@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import useInterval from "../useInterval";
+import { Typography, Divider, Box, Paper, Button } from '@material-ui/core';
 // import './App.css';
-
-function Timer({ pomodoro }) {
-  const [timeLeft, setTimeleft] = useState(15);
+function Timer({ handlePomodoro }) {
+  const defaultTime = 20 * 60
+  const [timeLeft, setTimeleft] = useState(defaultTime);
   const [clockTicking, setClockTicking] = useState(false);
 
   useInterval(
@@ -21,19 +22,25 @@ function Timer({ pomodoro }) {
     setTimeleft(timeLeft - 1);
   };
 
-  if (timeLeft < 0){
-    setTimeleft(15);
+  if (timeLeft < 0) {
+    setTimeleft(defaultTime);
     setClockTicking(false);
-    pomodoro()
+    handlePomodoro();
   }
 
-
   return (
-    <div className="">
-      <h1>{timeLeft}</h1>
-      <button onClick={clickHandle}>Click me!</button>
-    </div>
+    <Paper>
+      <Typography>{timeFormatter(timeLeft)}</Typography>
+      <Button onClick={clickHandle}>Click me!</Button>
+    </Paper>
   );
+}
+
+//TODO make sure that time and seconds always have 2 digits each
+const timeFormatter = (time) => {
+const mins = Math.floor(time / 60);
+const secsLeft = time % 60;
+return <Typography>{mins}:{secsLeft}</Typography>
 }
 
 export default Timer;

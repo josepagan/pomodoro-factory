@@ -7,7 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+// import DeleteIcon from '@material-ui/icons/Delete';
+import ArchiveIcon from '@material-ui/icons/Archive';
 
 //TODO (facepalm) it looks like datagrid was a simplified version of this.
 // Consider to switch to datagrid to simplify the code
@@ -18,20 +21,20 @@ import Paper from '@material-ui/core/Paper';
 //this is material-UI JS in CSS solution
 const useStyles = makeStyles({
   root: {
-    width: '100%'    
+    width: '100%'
   },
   container: {
     // forces scrollable 
     maxHeight: 440,
   },
-  darkcell:{
+  darkcell: {
     backgroundColor: 'black',
     color: 'white'
   }
 });
 
 
-const TodoTable = ({ todoArray }) => {
+const TodoTable = ({ todoArray, name }) => {
 
   const classes = useStyles();
 
@@ -42,34 +45,48 @@ const TodoTable = ({ todoArray }) => {
       {/* <TableCell>
         <Paper>OMG</Paper>
       </TableCell> */}
-      <TableCell align='center'>
+      <TableCell>
+        <Typography>
         {text}
+        </Typography>
         {/* <PomoCountBox number={element.pomoCount} /> */}
       </TableCell>
       {/* add on tabble cell numbers of pomos adquired by task */}
       <TableCell>0</TableCell>
-      <TableCell>Archive</TableCell>
+      <TableCell>
+        <IconButton>
+          <ArchiveIcon fontSize="small" />
+        </IconButton>
+      </TableCell>
     </TableRow>
   );
 
 
   return (
     <Paper className={classes.root}>
-
-    <TableContainer className={classes.container}>
-      <Table stickyHeader>
-        <TableHead>
-          <TableRow>
-            <TableCell className={classes.darkcell}>Tasks:</TableCell>
-            <TableCell className={classes.darkcell}> pomocount</TableCell>
-            <TableCell className={classes.darkcell}>Fat&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody component={Paper} >
-          {rows}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <TableContainer className={classes.container}>
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
+              {/* changed classname from darkcell to darkcello to overide , i know, i know... */}
+              <TableCell className={classes.darkcello}>
+                <Typography>
+                {name}
+                </Typography>
+                </TableCell>
+              <TableCell className={classes.darkcello}>
+                <Typography>
+                pomocount
+                </Typography>
+                </TableCell>
+              <TableCell className={classes.darkcello}></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody component={Paper} >
+            {rows}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Paper>
   );
 };

@@ -6,7 +6,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 const themeLight = createMuiTheme({
   palette: {
     background: {
-      default: "#ccd"
+      default: "lightgray"
     }
   }
 });
@@ -24,14 +24,16 @@ const themeDark = createMuiTheme({
 
 const Theme = (props) => {
   const [light, setLight] = React.useState(true);
-  return (
-    <MuiThemeProvider theme={light ? themeLight : themeDark}>
-      <CssBaseline />
-      {/* to do... move button to Navbar wire the props to here */}
-      {/* <Button onClick={() => setLight(prev => !prev)}>Toggle Theme</Button> */}
-      {props.children}
-    </MuiThemeProvider>
-  );
+  //am using the return below to bypass all the theme until i understand material ui theming
+  return (props.children)
+  // return (
+  //   <MuiThemeProvider theme={light ? themeLight : themeDark}>
+  //     <CssBaseline />
+  //     {/* to do... move button to Navbar wire the props to here */}
+  //     {/* <Button onClick={() => setLight(prev => !prev)}>Toggle Theme</Button> */}
+  //     {props.children}
+  //   </MuiThemeProvider>
+  // );
 };
 
 export default Theme

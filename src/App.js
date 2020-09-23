@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Timer from "./components/Timer";
 import Todo from './components/Todo'
-import { Button, Grid, Card } from '@material-ui/core'
+import { Button, Grid, Card, Paper } from '@material-ui/core'
 import CardsGrid from './components/Cards'
 import NavBar from './components/NavBar'
 import Theme from './components/Theme'
@@ -16,38 +16,31 @@ const App = () => {
     setPomodoroCount(pomodoroCount + 1);
   };
 
-  const fetchData =  function() {
+  const fetchData = function () {
     axios.get('http://localhost:3010/api/taskLists/')
-      .then(res => setTasksList(res.data) )
+      .then(res => setTasksList(res.data))
   }
 
   useEffect(
-    () => {      
+    () => {
       fetchData();
     }, [])
-
-    useEffect(
-      () => {      
-        fetchData();
-      }, [resData])
-  
-
 
   return (
     <Theme>
 
-    <div className="App">
+      <div className="App">
 
-      <NavBar />
+        <NavBar
+          pomodoroCount={pomodoroCount}
+          handlePomodoro={handlePomodoro} />
+        {/* TODO maybe instead of grids of separate list to do a tag filter mode */}
+        {/* in which there is ony a filtered list of tasks dependant on the 
+      active tags
+        */}
+        <CardsGrid data={tasksLists} setTasksList={setTasksList} />
 
-      <h1>Pomodoros: {pomodoroCount}</h1>
-
-      <Timer pomodoro={handlePomodoro} />
-      <CardsGrid data={tasksLists} setTasksList={setTasksList} />
-      
-    </div>
-    //to do create new to do list... again grrr
-    //y muchas mas cosas
+      </div>
     </Theme>
 
   );

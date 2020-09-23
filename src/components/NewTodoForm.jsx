@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios'
+import { TextField } from '@material-ui/core';
 
 const NewTodoForm = ({_id, pushNewTask }) => {
     const [text, setText] = useState("");
@@ -16,8 +17,16 @@ const NewTodoForm = ({_id, pushNewTask }) => {
     };
   
     return (
+      // TODO change in put to textfield:
+      // https://material-ui.com/components/text-fields/
       <form onSubmit={handleSubmission}>
-        <input type="text" onChange={handleChange} value={text} />
+        {/* <input type="text" onChange={handleChange} value={text} /> */}
+        <TextField
+         id="outlined-basic"
+         label="New task..."
+         variant="outlined"
+         onChange={handleChange}
+         value={text} />
       </form>
     );
   };
