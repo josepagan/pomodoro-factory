@@ -8,17 +8,35 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-// const useStyles = makeStyles({
-//   table: {
-//     minWidth: 650,
-//   },
-// });
+
+//TODO (facepalm) it looks like datagrid was a simplified version of this.
+// Consider to switch to datagrid to simplify the code
+//https://material-ui.com/components/data-grid/
 
 
-//todo learn about the package material-table to add edits and stuff
+
+//this is material-UI JS in CSS solution
+const useStyles = makeStyles({
+  root: {
+    width: '100%'    
+  },
+  container: {
+    // forces scrollable 
+    maxHeight: 440,
+  },
+  darkcell:{
+    backgroundColor: 'black',
+    color: 'white'
+  }
+});
+
 
 const TodoTable = ({ todoArray }) => {
-  //todo, convert list into datas
+
+  const classes = useStyles();
+
+  // TODO look for icons to add to tasks like
+
   const rows = todoArray.map(({ text }) =>
     <TableRow>
       {/* <TableCell>
@@ -28,16 +46,32 @@ const TodoTable = ({ todoArray }) => {
         {text}
         {/* <PomoCountBox number={element.pomoCount} /> */}
       </TableCell>
+      {/* add on tabble cell numbers of pomos adquired by task */}
+      <TableCell>0</TableCell>
+      <TableCell>Archive</TableCell>
     </TableRow>
   );
-  return <TableContainer>
-    <Table >
-    <TableBody component={Paper}>
-      {rows}
-    </TableBody>
-    </Table>
 
-  </TableContainer>;
+
+  return (
+    <Paper className={classes.root}>
+
+    <TableContainer className={classes.container}>
+      <Table stickyHeader>
+        <TableHead>
+          <TableRow>
+            <TableCell className={classes.darkcell}>Tasks:</TableCell>
+            <TableCell className={classes.darkcell}> pomocount</TableCell>
+            <TableCell className={classes.darkcell}>Fat&nbsp;(g)</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody component={Paper} >
+          {rows}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </Paper>
+  );
 };
 
 export default TodoTable

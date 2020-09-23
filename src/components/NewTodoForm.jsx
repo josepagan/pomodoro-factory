@@ -10,7 +10,6 @@ const NewTodoForm = ({_id, pushNewTask }) => {
   
     const handleSubmission = event => {
       axios.post('http://localhost:3010/api/taskLists/',{_id,text})
-      //TODO what I have to do is just push the last one into tasks
       .then(res => pushNewTask(res.data))    
       setText("");
       event.preventDefault();
