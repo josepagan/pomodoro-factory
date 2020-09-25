@@ -11,7 +11,6 @@ import axios from 'axios';
 const App = () => {
   const [tasksLists, setTasksList] = useState(null);
   const [pomodoroCount, setPomodoroCount] = useState(0);
-  const [resData, setResData] = useState(null)
   const handlePomodoro = () => {
     setPomodoroCount(pomodoroCount + 1);
   };
@@ -21,10 +20,7 @@ const App = () => {
       .then(res => setTasksList(res.data))
   }
 
-  useEffect(
-    () => {
-      fetchData();
-    }, [])
+  useEffect( () => { fetchData();}, []) 
 
   return (
     <Theme>
