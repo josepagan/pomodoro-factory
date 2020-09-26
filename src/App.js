@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Timer from "./components/Timer";
-import Todo from './components/Todo'
-import { Button, Grid, Card, Paper } from '@material-ui/core'
 import CardsGrid from './components/Cards'
 import NavBar from './components/NavBar'
 import Theme from './components/Theme'
