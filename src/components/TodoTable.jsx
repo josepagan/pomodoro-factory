@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -37,8 +37,15 @@ const useStyles = makeStyles({
 const TodoTable = ({ todoArray, name }) => {
 
   const classes = useStyles();
+  const rowsEndRef = useRef(null);
 
   // TODO look for icons to add to tasks like
+
+  const scrollToBottom = () => {
+    rowsEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  //TODO change behaviour so only scrolls on new input , not when it is loaded
+  useEffect(scrollToBottom, [todoArray]);
 
   const rows = todoArray.map(({ text }) =>
     <TableRow>
@@ -69,21 +76,22 @@ const TodoTable = ({ todoArray, name }) => {
           <TableHead>
             <TableRow>
               {/* changed classname from darkcell to darkcello to overide , i know, i know... */}
-              <TableCell className={classes.darkcello}>
+              <TableCell  colspan="3" className={classes.darkcello}>
                 <Typography>
                 {name}
                 </Typography>
                 </TableCell>
-              <TableCell className={classes.darkcello}>
+              {/* <TableCell className={classes.darkcello}>
                 <Typography>
                 pomocount
                 </Typography>
-                </TableCell>
+                </TableCell> */}
               <TableCell className={classes.darkcello}></TableCell>
             </TableRow>
           </TableHead>
           <TableBody component={Paper} >
             {rows}
+            <div ref={rowsEndRef} />
           </TableBody>
         </Table>
       </TableContainer>

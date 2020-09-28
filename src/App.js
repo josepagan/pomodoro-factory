@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import CardsGrid from './components/Cards'
+import CardsGrid from './components/CardsGrid'
 import NavBar from './components/NavBar'
 import Theme from './components/Theme'
 import axios from 'axios';
@@ -21,9 +21,7 @@ const App = () => {
 
   return (
     <Theme>
-
       <div className="App">
-
         <NavBar
           pomodoroCount={pomodoroCount}
           handlePomodoro={handlePomodoro} />
@@ -32,10 +30,8 @@ const App = () => {
       active tags
         */}
         <CardsGrid data={tasksLists} setTasksList={setTasksList} />
-
       </div>
     </Theme>
-
   );
 }
 

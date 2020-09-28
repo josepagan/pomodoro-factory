@@ -1,7 +1,9 @@
 
 import React from 'react';
-import { AppBar, Toolbar, Typography, Divider, Box } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Divider, Box, Button } from '@material-ui/core';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import Timer from './Timer'
+
 const NavBar = ({ pomodoroCount, handlePomodoro }) => {
   return (
     <div>
@@ -24,6 +26,16 @@ const NavBar = ({ pomodoroCount, handlePomodoro }) => {
               handlePomodoro={handlePomodoro}
             />
           </Box>
+          {/* <AddBoxIcon fontSize="large" /> */}
+          <Button
+          onClick={()=>{console.log('OMG')}}
+            variant="contained"
+            color="primary"
+            // className={classes.button}
+            startIcon={<AddBoxIcon />}
+          >New List </Button>
+
+
         </Toolbar>
       </AppBar>
     </div>
