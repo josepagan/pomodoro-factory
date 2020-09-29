@@ -13,7 +13,7 @@ const App = () => {
   };
 
   const fetchData = function () {
-    axios.get('http://localhost:3010/api/taskLists/')
+    axios.get('http://localhost:3010/api/tasksLists/')
       .then(res => setTasksList(res.data))
   }
 

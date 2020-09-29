@@ -7,7 +7,7 @@ const [tasksState, setTasksState] = useState(tasks);
 const pushNewTask = (newTask) => setTasksState([...tasksState, newTask])
     return (
     <div>
-      <TodoTable todoArray={tasksState} name={name} />
+      <TodoTable todoArray={tasksState} name={name} _id={_id}/>
       <NewTodoForm
         _id={_id}
         pushNewTask={pushNewTask}

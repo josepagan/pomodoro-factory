@@ -1,22 +1,14 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-// import DeleteIcon from '@material-ui/icons/Delete';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { Paper, Typography, IconButton, TextField, Fab } from '@material-ui/core/';
 import ArchiveIcon from '@material-ui/icons/Archive';
+import EditIcon from '@material-ui/icons/Edit';
+import axios from 'axios'
 
 //TODO (facepalm) it looks like datagrid was a simplified version of this.
 // Consider to switch to datagrid to simplify the code
 //https://material-ui.com/components/data-grid/
-
-
 
 //this is material-UI JS in CSS solution
 const useStyles = makeStyles({
@@ -33,11 +25,11 @@ const useStyles = makeStyles({
   }
 });
 
-
-const TodoTable = ({ todoArray, name }) => {
+const TodoTable = ({ todoArray, name, _id }) => {
 
   const classes = useStyles();
   const rowsEndRef = useRef(null);
+  const newList = name === "new list"
 
   // TODO look for icons to add to tasks like
 
@@ -53,9 +45,11 @@ const TodoTable = ({ todoArray, name }) => {
         <Paper>OMG</Paper>
       </TableCell> */}
       <TableCell>
+
         <Typography>
-        {text}
+          {text}
         </Typography>
+
         {/* <PomoCountBox number={element.pomoCount} /> */}
       </TableCell>
       {/* add on tabble cell numbers of pomos adquired by task */}
@@ -68,7 +62,6 @@ const TodoTable = ({ todoArray, name }) => {
     </TableRow>
   );
 
-
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -76,11 +69,18 @@ const TodoTable = ({ todoArray, name }) => {
           <TableHead>
             <TableRow>
               {/* changed classname from darkcell to darkcello to overide , i know, i know... */}
-              <TableCell  colspan="3" className={classes.darkcello}>
-                <Typography>
-                {name}
+              <TableCell colspan="3" className={classes.darkcello}>
+                <Typography variant="h5">
+                  {name}
                 </Typography>
-                </TableCell>
+                <Frankenstein
+                  _id={_id}
+                  type="TaskList"
+                  todoArray={todoArray}>
+                  {name}
+                </Frankenstein>
+
+              </TableCell>
               {/* <TableCell className={classes.darkcello}>
                 <Typography>
                 pomocount
@@ -98,5 +98,34 @@ const TodoTable = ({ todoArray, name }) => {
     </Paper>
   );
 };
+
+
+
+const Frankenstein = (props) => {
+  const endPoint = "http://localhost:3010/api/tasksLists/"
+  const [editMode, setEditMode] = useState(false)
+  const [textValue, setTextValue] = useState(props.children)
+  console.log(props)
+  const submitHandle = (event) => {
+    console.log(textValue);
+    axios.put(endPoint, {_id:props._id, newText:textValue, type:props.type}).then(console.log("ALL DONE"))
+    event.preventDefault();
+    setEditMode(false);
+  }
+
+  if (editMode) return (
+    <form onSubmit={submitHandle}>
+      <TextField defaultValue={textValue}
+        variant="outlined"
+        onChange={(e) => { setTextValue(e.target.value) }} />
+    </form>
+  )
+  else return (<>
+    <Typography >
+      {textValue}
+    </Typography>
+    <EditIcon onClick={() => { setEditMode(true) }} /></>)
+}
+
 
 export default TodoTable

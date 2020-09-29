@@ -10,7 +10,7 @@ const NewTodoForm = ({ _id, pushNewTask }) => {
   };
 
   const handleSubmission = event => {
-    axios.post('http://localhost:3010/api/taskLists/', { _id, text })
+    axios.post('http://localhost:3010/api/tasks/', { _id, text })
       .then(res => pushNewTask(res.data))
     setText("");
     event.preventDefault();
@@ -24,11 +24,13 @@ const NewTodoForm = ({ _id, pushNewTask }) => {
       <form onSubmit={handleSubmission}>
         {/* <input type="text" onChange={handleChange} value={text} /> */}
         <TextField
+        //TODO find out why fullWidth does not work
+          fullWidth
           id="todo-input"
           label="New task..."
           variant="outlined"
           onChange={handleChange}
-          // margin="normal"
+          margin="normal"
           value={text} />
       </form>
     </Box>
