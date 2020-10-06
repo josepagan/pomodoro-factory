@@ -99,8 +99,6 @@ const TodoTable = ({ todoArray, name, _id }) => {
   );
 };
 
-
-
 const Frankenstein = (props) => {
   const endPoint = "http://localhost:3010/api/tasksLists/"
   const [editMode, setEditMode] = useState(false)
@@ -126,6 +124,5 @@ const Frankenstein = (props) => {
     </Typography>
     <EditIcon onClick={() => { setEditMode(true) }} /></>)
 }
-
 
 export default TodoTable
